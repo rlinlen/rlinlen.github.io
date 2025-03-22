@@ -108,7 +108,7 @@ Frontend URL會具有以下格式: https://xxxxxxxxx.cloudfront.net
 
 > 搜尋是透過Duckduckgo或Firecrawl完成的
 {: .prompt-info}
-- 將Model Activation勾選剛剛在Bedrock有啟用的模型，避免使用者誤選
+- 將Model Activation勾選前一步驟已在Bedrock啟用的模型，避免使用者誤選
 ![](/assets/img/BedrockChatBotDeployment/chatbot-create-2.png)
 
 - 點選Create完成創建
@@ -156,6 +156,55 @@ KB目前支援三種方式。
 > 問答時，需選擇其中一個剛剛啟用的模型。一般來說，簡易回答可以優先選擇Nova Lite或Haiku，複雜的問題可以選擇Nova Pro或Sonnet。
 {: .prompt-tip }
 
+## 更新方式
+此Github專案截止2025-03-21尚在積極開發中，因此會不定時釋出功能更新與修補。如要更新，目前有兩種方式：
+
+1.透過原有方式更新
+- 此方式相對簡單，但是缺點重新部署後，**Frontend Url會變更**。（資料還是會保留）
+- 回到`CloudShell`，更新程式碼
+```
+cd bedrock-claude-chat
+git pull
+```
+
+- 進行部署
+```
+./bin.sh --cdk-json-override '{
+  "context": {
+    "selfSignUpEnabled": false,
+    "bedrockRegion": "ap-northeast-1"
+  }
+}'
+```
+
+2.透過cdk更新
+> Cloudshell的`$HOME`有1GB大小的限制，因此無法在原目錄進行下方操作。建議使用個人Unix環境，或是另外開啟一台EC2的linux進行。您可使用AWS Free tier挑選適合的t系列型號來進行。
+{: .prompt-warning}
+
+- 確保使用的Linux機器
+    - 已使用aws configure設定aws身份，並取得對應管理權限
+    - 已安裝docker和Node.js
+
+- 更新 cdk.json
+```
+cd bedrock-claude-chat
+cd cdk
+sed -i 's/"bedrockRegion"[^,]*,/"bedrockRegion": "ap-northeast-1",/g' cdk.json
+sed -i 's/"selfSignUpEnabled"[^,]*,/"selfSignUpEnabled": false,/g' cdk.json
+```
+
+- 第一次操作時，須先執行以下指令。未來再次更新時則不需要。
+```
+npx cdk bootstrap
+```
+
+- 執行更新
+```
+npx cdk deploy --require-approval never --all
+```
+
+- [Github參考步驟](https://github.com/aws-samples/bedrock-claude-chat?tab=readme-ov-file#deploy-using-cdk)
+
 ## 後續調整方向
 - 資料整合進s3建議
 - 優化查詢內容
@@ -165,5 +214,5 @@ KB目前支援三種方式。
 - 成本優化
 - 客製化需求
 
-> 請聯繫您的aws account team 取得更多協助
+> 可以聯繫您的aws account team 取得更多協助
 {: .prompt-tip }
