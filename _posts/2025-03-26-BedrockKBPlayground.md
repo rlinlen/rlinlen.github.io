@@ -107,7 +107,7 @@ tags: [bedrock,ai,chatbot,kb]     # TAG names should always be lowercase
 {: .prompt-info }
 
 >AWS account ID是每個aws環境的唯一識別碼。
->![image](/assets/img/BedrockShare/NavBar-3.png)
+>![image](/assets/img/WorkshopShare/NavBar-3.png)
 {: .prompt-info }
 
 
