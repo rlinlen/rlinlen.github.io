@@ -1,5 +1,5 @@
 ---
-title: Bedrock 知識庫聊天機器人部署教學
+title: Bedrock 知識庫聊天機器人end-to-end UI部署教學
 date: 2025-03-21 00:00:00 +0800
 categories: [aws]
 tags: [bedrock,ai,chatbot,kb]     # TAG names should always be lowercase
