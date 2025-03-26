@@ -69,11 +69,11 @@ tags: [bedrock,ai,chatbot,kb]     # TAG names should always be lowercase
 ## 2. 啟用模型存取權
 >確認區域為 United States(Oregon), us-west-2，並確認使用者為 WSParticipantRole/Participant，避免誤用到貴司 AWS Account
 {: .prompt-warning }
-![image](/assets/img/BedrockShare/NavBar-1.png)
+![image](/assets/img/WorkshopShare/NavBar-1.png)
 
 
 點擊 齒輪圖示  可以更換為您習慣的語言
-![image](/assets/img/BedrockShare/NavBar-2.png)
+![image](/assets/img/WorkshopShare/NavBar-2.png)
 
 
 進入 Amazon Bedrock 服務
