@@ -6,7 +6,7 @@ tags: [Sagemaker,Sagemaker Studio,protein folding,ESM,ai]     # TAG names should
 ---
 
 ## 背景說明
-本篇文章提供如何透過Sagemaker Canvas AutoML的功能，在不寫程式碼的情況下，進行高品質的機器學習模型的訓練與部署。
+本篇文章提供如何透過Sagemaker Studio，使用Hugging face上的transformer蛋白質模型，簡易測試與部署。
 
 **建議瀏覽器**
 - Chrome
