@@ -1,1 +1,28 @@
+bundle exec jekyll s
+
+### 1-2 手動上傳資料
+
+搜尋s3，並選擇Sagemaker創建的資料夾，找到資料夾
+```
+sagemaker-[region]-[aws account id]
+```
+![image](/assets/img/SagemakerCanvasImageClassification/upload-1.png)
+
+>請留意選擇的資料夾，如選成其他資料夾需要額外資安設定（CORS）才能運作
+{: .prompt-tip }
+
+>S3是Simple Storage Service的縮寫，顧名思義，S3是一套關於資料儲存的雲端服務，類似於地端使用的公槽空間。使用S3的價值在於，它提供我們一套完善的資安、資料可用性及資料共享服務，並原生跟其他AWS服務深度整合。S3容量無上限、單一檔案大小最高5TB。
+{: .prompt-info }
+>Bucket name需為全球唯一，因此請避免使用相同名稱
+{: .prompt-info }
+
+>AWS account ID是每個aws環境的唯一識別碼。
+>![image](/assets/img/WorkshopShare/NavBar-3.png)
+{: .prompt-info }
+
+點入該Bucket，並點選 Upload > Add Folder
+![image](/assets/img/SagemakerCanvasImageClassification/upload-2.png)
+
+選擇剛剛解壓的資料夾：xray-workshop-150 > 選擇Upload
+![image](/assets/img/SagemakerCanvasImageClassification/upload-3.png)
 

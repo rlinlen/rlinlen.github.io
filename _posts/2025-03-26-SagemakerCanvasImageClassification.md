@@ -33,15 +33,32 @@ https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
 
 
 ## 1. 實驗環境準備
-下載並解壓縮胸部x光影像
+因為資料大小較大，為避免場地網路速度限制，我們將使用aws骨幹網路，直接在不經過本地電腦的情況下，下載並上傳影像。如果您會後有興趣進一步查看檔案，可點選上方連結，直接下載，解壓縮胸部x光影像後，會看到150張影像檔案。
 ![image](/assets/img/SagemakerCanvasImageClassification/data.png)
 
+1. 開啟aws console, 並切換到對應的region。
+
+2. 執行 `CloudShell`
+![](/assets/img/BedrockChatBotDeployment/cloudshell-1.png)
+
+> AWS CloudShell 是以瀏覽器為基礎的預先驗證Shell，提供使用者快速操作AWS環境用。使用 AWS CloudShell時，您最多可以在使用1GB的持久性儲存體，無需額外費用。持續性儲存空間位於主目錄 ($HOME) 中，而且對您來說是私有的。
+{: .prompt-tip }
+
+3. 將以下指令中，所有<>的部分更新;貼上並執行以下指令，下載程式碼
+```
+curl -s -D - "<short_url>" | grep -i "target:" | cut -d' ' -f2- | tr -d '\r' | xargs -I {} curl -L -o xray-workshop-150.zip "{}"
+unzip xray-workshop-150.zip
+aws s3 cp --recursive ./xray-workshop-150 s3://sagemaker-us-west-2-<account_id>/xray-workshop-150/
+```
+![](/assets/img/SagemakerCanvasImageClassification/cloudshell-1.png)
+
+> 上述指令目的為：下載檔案、解壓、上傳到s3的文件夾中
+{: .prompt-info }
 
 ## 2. 模型訓練
 ### 2-1. 進入Sagemaker環境
 搜尋Sagemaker AI
 ![image](/assets/img/SagemakerCanvasShare/access-1.png)
-
 
 點擊Canvas > Select user profile應已創建SageMakerUser
 ![image](/assets/img/SagemakerCanvasShare/access-2.png)
@@ -57,33 +74,7 @@ https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
 >![image](/assets/img/SagemakerCanvasShare/access-5.png)
 
 
-### 2-2. 上傳資料
-搜尋s3，並選擇Sagemaker創建的資料夾，找到資料夾
-```
-sagemaker-[region]-[aws account id]
-```
-![image](/assets/img/SagemakerCanvasImageClassification/upload-1.png)
-
->請留意選擇的資料夾，如選成其他資料夾需要額外資安設定（CORS）才能運作
-{: .prompt-tip }
-
->S3是Simple Storage Service的縮寫，顧名思義，S3是一套關於資料儲存的雲端服務，類似於地端使用的公槽空間。使用S3的價值在於，它提供我們一套完善的資安、資料可用性及資料共享服務，並原生跟其他AWS服務深度整合。S3容量無上限、單一檔案大小最高5TB。
-{: .prompt-info }
->Bucket name需為全球唯一，因此請避免使用相同名稱
-{: .prompt-info }
-
->AWS account ID是每個aws環境的唯一識別碼。
->![image](/assets/img/WorkshopShare/NavBar-3.png)
-{: .prompt-info }
-
-點入該Bucket，並點選 Upload > Add Folder
-![image](/assets/img/SagemakerCanvasImageClassification/upload-2.png)
-
-選擇剛剛解壓的資料夾：xray-workshop-150 > 選擇Upload
-![image](/assets/img/SagemakerCanvasImageClassification/upload-3.png)
-
-
-### 2-3 訓練模型
+### 2-2 訓練模型
 選擇 Datasets > Import Data > Image > "xrayimagesmall"
 ![image](/assets/img/SagemakerCanvasImageClassification/canvas-1.png)
 ![image](/assets/img/SagemakerCanvasImageClassification/canvas-2.png)
@@ -126,9 +117,5 @@ sagemaker-[region]-[aws account id]
 >當實驗結束後，務必點擊Log out退出當前Canvas環境。如果直接關閉視窗，Canvas的費用會持續進行。
 {: .prompt-warning }
 ![image](https://hackmd.io/_uploads/BkP-bAJ2Jl.png)
-
-
-
-
 
 恭喜您已完成本場次workshop。

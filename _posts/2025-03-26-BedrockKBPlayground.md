@@ -85,7 +85,7 @@ tags: [bedrock,ai,chatbot,kb]     # TAG names should always be lowercase
 
 選用以下模型啟用
 - Titan Text Embeddings V2
-- Claude 3 Haiku
+- Claude 3.5 Haiku
 - Claude 3.5 Sonnet v2
 - Nova Lite
 - Nova Pro
