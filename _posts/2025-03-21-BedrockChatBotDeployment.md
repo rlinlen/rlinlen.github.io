@@ -6,10 +6,10 @@ tags: [bedrock,ai,chatbot,kb]     # TAG names should always be lowercase
 ---
 
 ## 背景說明
-本篇文章提供 [aws-samples/bedrock-claude-chat](https://github.com/aws-samples/bedrock-claude-chat)的安裝補充說明
+本篇文章提供 [aws-samples/bedrock-chat](https://github.com/aws-samples/bedrock-chat)的安裝補充說明
 
-### 什麼是bedrock-claude-chat
-[Bedrock-claude-chat](https://github.com/aws-samples/bedrock-claude-chat)是aws社群提供的一個開源chatbot的範例應用。它基於bedrock提供的LLM服務基礎上，整合使用者驗證、資安防護、知識庫等功能，讓企業可以快速導入與測試開箱即用的私有知識庫聊天機器人，提升生產力。
+### 什麼是bedrock-chat
+[Bedrock-chat](https://github.com/aws-samples/bedrock-chat)是aws社群提供的一個開源chatbot的範例應用。它基於bedrock提供的LLM服務基礎上，整合使用者驗證、資安防護、知識庫等功能，讓企業可以快速導入與測試開箱即用的私有知識庫聊天機器人，提升生產力。
 
 ### 適用對象
 已經擁有aws帳號，想快速導入私有知識庫聊天機器人的IT人員
@@ -29,8 +29,8 @@ tags: [bedrock,ai,chatbot,kb]     # TAG names should always be lowercase
 
 3. 貼上並執行以下指令，下載程式碼
 ```
-git clone https://github.com/aws-samples/bedrock-claude-chat.git
-cd bedrock-claude-chat
+git clone https://github.com/aws-samples/bedrock-chat.git
+cd bedrock-chat
 chmod +x bin.sh
 ```
 ![](/assets/img/BedrockChatBotDeployment/cloudshell-2.png)
