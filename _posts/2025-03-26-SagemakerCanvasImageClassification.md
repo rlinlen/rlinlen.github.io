@@ -17,8 +17,9 @@ tags: [Sagemaker,Sagemaker Canvas,AutoML,ai,low-code]     # TAG names should alw
 - 短網址：<參與workshop時提供>
 - access code: <參與workshop時提供>
 
-- 測試檔案材料連結: [下載檔案](/assets/file/xray-workshop-150.zip)
-> 測試檔案為以下資料集的子集，為考慮workshop時間而做縮減
+- 50張測試檔案材料連結: [下載檔案](/assets/file/xray-workshop-small.zip)
+- 150張測試檔案材料連結: [下載檔案](/assets/file/xray-workshop-150.zip)
+> 測試檔案為以下資料集(約5000張)的子集，為考慮workshop時間而做縮減
 Ref:
 https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
 {: .prompt-info }
@@ -44,11 +45,20 @@ https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
 > AWS CloudShell 是以瀏覽器為基礎的預先驗證Shell，提供使用者快速操作AWS環境用。使用 AWS CloudShell時，您最多可以在使用1GB的持久性儲存體，無需額外費用。持續性儲存空間位於主目錄 ($HOME) 中，而且對您來說是私有的。
 {: .prompt-tip }
 
-3. 將以下指令中，所有<>的部分更新;貼上並執行以下指令，下載程式碼
+3. 
+
+> 如果您使用文章開頭提供的檔案，請將以下指令中，所有{}的部分更新;貼上並執行以下指令，執行程式碼
 ```
-curl -s -D - "<short_url>" | grep -i "target:" | cut -d' ' -f2- | tr -d '\r' | xargs -I {} curl -L -o xray-workshop-150.zip "{}"
+curl -o xray-workshop-small.zip https://rlinlen.github.io/assets/file/xray-workshop-small.zip
+unzip xray-workshop-small.zip
+aws s3 cp --recursive ./xray-workshop-small s3://sagemaker-us-west-2-{account_id}/xray-workshop-small/
+```
+
+> 如果您拿到的是短網址的檔案，請將以下指令中，所有{}的部分更新;貼上並執行以下指令，執行程式碼
+```
+curl -s -D - "{short_url}" | grep -i "target:" | cut -d' ' -f2- | tr -d '\r' | xargs -I {} curl -L -o xray-workshop-150.zip "{}"
 unzip xray-workshop-150.zip
-aws s3 cp --recursive ./xray-workshop-150 s3://sagemaker-us-west-2-<account_id>/xray-workshop-150/
+aws s3 cp --recursive ./xray-workshop-150 s3://sagemaker-us-west-2-{account_id}/xray-workshop-150/
 ```
 ![](/assets/img/SagemakerCanvasImageClassification/cloudshell-1.png)
 
@@ -109,7 +119,7 @@ aws s3 cp --recursive ./xray-workshop-150 s3://sagemaker-us-west-2-<account_id>/
 後續可以進行deploy，使用API呼叫模型
 
 
->當模型使用約5000張影像進行Standard build訓練後，準確率（accuracy）可達到98.4%
+>當模型使用約5000張影像進行Standard build訓練後，準確率（accuracy）可達到99.3%
 {: .prompt-tip }
 
 ## 4. 關閉Canvas
